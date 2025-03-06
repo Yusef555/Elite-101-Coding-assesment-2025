@@ -3,7 +3,7 @@ Resturant Table Seating System
 Code2College assessment 2025
 """
 
-def count_free_tables(tables: list, guests: int) -> int:
+def count_free_tables(tables: list, guests: int):
     #Level 1
     #returns the number of tables that are free and can seat the guests
     
@@ -13,7 +13,7 @@ def count_free_tables(tables: list, guests: int) -> int:
             free_tables += 1
     return free_tables
 
-def find_free_tables(tables: list, party_size: int) -> int:
+def find_free_tables(tables: list, party_size: int):
     #Level 2
     #returns the first table number that is free and can seat the guests
 
@@ -22,7 +22,7 @@ def find_free_tables(tables: list, party_size: int) -> int:
             return table["table_id"]
     return None
 
-def show_all_tables_that_can_seat(tables: list, guests: int) -> list:
+def show_all_tables_that_can_seat(tables: list, guests: int):
     """
     Level 3
     returns the multiple table numbers the guests can sit in
@@ -33,11 +33,11 @@ def show_all_tables_that_can_seat(tables: list, guests: int) -> list:
             free_tables.append(table["table_id"])
     return free_tables
     
-def find_tables_with_combos(tables: list, party_size: int) -> list:
-    """
-    Level 4
-    returns the table numbers that can seat the guests in a combination of tables
-    """
+def find_tables_with_combos(tables: list, party_size: int):
+    
+    #Level 4
+    #returns the table numbers that can seat the guests in a combination of tables
+    
     results = []
 
     for table in tables:
