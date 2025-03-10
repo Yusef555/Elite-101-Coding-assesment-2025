@@ -3,7 +3,10 @@ Resturant Table Seating System
 Code2College assessment 2025
 """
 
+from resturant_tables import restaurant_tables
+
 def count_free_tables(tables: list, guests: int):
+    
     #Level 1
     #returns the number of tables that are free and can seat the guests
     
@@ -14,6 +17,7 @@ def count_free_tables(tables: list, guests: int):
     return free_tables
 
 def find_free_tables(tables: list, party_size: int):
+    
     #Level 2
     #returns the first table number that is free and can seat the guests
 
@@ -23,10 +27,10 @@ def find_free_tables(tables: list, party_size: int):
     return None
 
 def show_all_tables_that_can_seat(tables: list, guests: int):
-    """
-    Level 3
-    returns the multiple table numbers the guests can sit in
-    """
+   
+    #Level 3
+    #returns the multiple table numbers the guests can sit in
+    
     free_tables = []
     for table in tables:
         if not table["occupied"] and table["capacity"] >= guests:
@@ -57,7 +61,9 @@ def find_tables_with_combos(tables: list, party_size: int):
     return results
 
 def print_friendly_output(tables: list, party_size: int):
+    
     #prints friendly output for the table combinations
+
     combos = find_tables_with_combos(tables, party_size)
     output = []
     for combo in combos:
@@ -72,22 +78,29 @@ def print_friendly_output(tables: list, party_size: int):
     return "\n".join(output)
 
 def main():
-    #main function
-    tables = [
-        {"table_id": 1, "capacity": 4, "occupied": False, "neighbors": [2]},
-        {"table_id": 2, "capacity": 6, "occupied": False, "neighbors": [1, 3]},
-        {"table_id": 3, "capacity": 2, "occupied": True, "neighbors": [2]},
-        {"table_id": 4, "capacity": 8, "occupied": False, "neighbors": []},
-        {"table_id": 5, "capacity": 4, "occupied": True, "neighbors": []},
-        {"table_id": 6, "capacity": 10, "occupied": False, "neighbors": []},
-    ]
+    header = restaurant_tables[0]
+    tables = []
+    for i in range(1, len(header)):
+        table_id = int(header[i][1])
+        capacity = int(header[i][3])
+        neighbors = []
+        if i > 1:
+            neighbors.append(int(header[i-1][1]))
+        if i < len(header) - 1:
+            neighbors.append(int(header[i+1][1]))
+        for j in range(1, len(restaurant_tables)):
+            if restaurant_tables[j][i] == 'o':
+                occupied = False
+            else:
+                occupied = True
+            tables.append({"table_id": table_id, "capacity": capacity, "occupied": occupied, "neighbors": neighbors})
 
     party_size = 6
     print("Level 1: " + str(count_free_tables(tables, party_size)))
     print("Level 2: " + str(find_free_tables(tables, party_size)))
     print("Level 3: " + str(show_all_tables_that_can_seat(tables, party_size)))
     print("Level 4: " + str(find_tables_with_combos(tables, party_size)))
-    print("Bonus: " + print_friendly_output(tables, party_size))
+    print("Bonus: \n" + print_friendly_output(tables, party_size))
 
 if __name__ == "__main__":
     main()  #run the function
